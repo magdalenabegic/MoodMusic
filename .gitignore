@@ -3,3 +3,5 @@ venv/
 data/sessions.csv
 __pycache__/
 *.pyc
+.cache
+.cache-*
