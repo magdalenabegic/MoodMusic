@@ -1,0 +1,5 @@
+venv/
+.env
+data/sessions.csv
+__pycache__/
+*.pyc
