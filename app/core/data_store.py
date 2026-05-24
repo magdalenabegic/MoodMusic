@@ -5,17 +5,17 @@ Each session records one full usage cycle:
     1. User selects an emotion and context.
     2. App recommends tracks.
     3. User listens on Spotify.
-    4. User rates the effect (1–5).
+    4. User rates the effect (1-5).
 
 CSV columns:
-    timestamp      — ISO 8601 datetime of the session
-    emotion_key    — selected emotion key (e.g. "happy")
-    emotion_label  — display name (e.g. "Happy")
-    context_key    — selected context key (e.g. "working_out")
+    timestamp — ISO 8601 datetime of the session
+    emotion_key — selected emotion key (e.g. "happy")
+    emotion_label — display name (e.g. "Happy")
+    context_key — selected context key (e.g. "working_out")
     context_label  — display name (e.g. "Working Out")
-    mood_goal      — what the user wanted to achieve
-    rating         — 1–5 score of how well music achieved the goal
-    tracks_played  — number of tracks in the session
+    mood_goal — what the user wanted to achieve
+    rating  — 1-5 score of how well music achieved the goal
+    tracks_played — number of tracks in the session
 
 A flat CSV is sufficient for academic analysis. A production app would use
 a proper database.
@@ -75,7 +75,7 @@ def save_session(
         context_key: context key for analysis.
         context_label: display name for the context.
         mood_goal: what the user wanted to achieve.
-        rating: 1–5 rating.
+        rating: 1-5 rating.
         tracks_played: number of tracks recommended.
     """
     ensure_data_file()
