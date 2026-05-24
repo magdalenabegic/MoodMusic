@@ -50,14 +50,7 @@ CONTEXT_TAGS: dict[str, str] = {
 
 
 def _get_api_key() -> str:
-    # Try Streamlit Cloud secrets first, fall back to .env for local development.
-    try:
-        import streamlit as st
-        key = st.secrets.get("LASTFM_API_KEY")
-    except Exception:
-        key = None
-    if not key:
-        key = os.getenv("LASTFM_API_KEY")
+    key = os.getenv("LASTFM_API_KEY")
     if not key:
         raise ValueError(
             "Last.fm API key not found. "

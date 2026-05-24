@@ -5,7 +5,14 @@ Streamlit automatically treats files in the /pages/ directory as subpages.
 This file is the first screen the user sees.
 """
 
+import os
 import streamlit as st
+
+# On Streamlit Cloud, secrets are accessible via st.secrets.
+# We copy them into os.environ so all modules can use os.getenv() uniformly.
+for key in ["SPOTIFY_CLIENT_ID", "SPOTIFY_CLIENT_SECRET", "SPOTIFY_REDIRECT_URI", "LASTFM_API_KEY"]:
+    if key in st.secrets and not os.getenv(key):
+        os.environ[key] = st.secrets[key]
 
 st.set_page_config(
     page_title="MoodMusic",
@@ -55,7 +62,7 @@ with col1:
     st.write("Tell us how you are feeling right now")
 with col2:
     st.markdown("Listen")
-    st.write("Get music personalised for you")
+    st.write("Get music personalised to you")
 with col3:
     st.markdown("Track")
     st.write("See how music affects your mood over time")
@@ -76,4 +83,4 @@ st.divider()
 if st.button("Get started →", use_container_width=True):
     st.switch_page("pages/1_mood.py")
 
-st.caption("This is a university project for the Affective Computing course, built with Python, Streamlit and the Spotify API")
+st.caption("Affective Computing project built with Python, Streamlit and the Spotify API")
