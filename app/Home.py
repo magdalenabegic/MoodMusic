@@ -51,13 +51,13 @@ st.divider()
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.markdown("### Feel")
+    st.markdown("Feel")
     st.write("Tell us how you are feeling right now")
 with col2:
-    st.markdown("### Listen")
-    st.write("Get music personalised to you")
+    st.markdown("Listen")
+    st.write("Get music personalised for you")
 with col3:
-    st.markdown("### Track")
+    st.markdown("Track")
     st.write("See how music affects your mood over time")
 
 st.divider()
@@ -74,6 +74,6 @@ st.markdown("""
 st.divider()
 
 if st.button("Get started →", use_container_width=True):
-    st.switch_page("pages/1_Mood.py")
+    st.switch_page("pages/1_mood.py")
 
-st.caption("Affective Computing project built with Python, Streamlit and the Spotify API")
+st.caption("This is a university project for the Affective Computing course, built with Python, Streamlit and the Spotify API")

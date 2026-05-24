@@ -3,3 +3,4 @@ spotipy
 python-dotenv
 pandas
 plotly
+requests
