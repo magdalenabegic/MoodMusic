@@ -167,7 +167,8 @@ venv\Scripts\activate           # Windows
 
 pip install -r requirements.txt
 
-cp .env.example .env
+cp .env.example .env   # Mac/Linux
+copy .env.example .env # Windows
 # Edit .env and add your API keys
 
 streamlit run app/Home.py
