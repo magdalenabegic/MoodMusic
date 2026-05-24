@@ -86,7 +86,7 @@ def _build_query(emotion_key: str, context_key: str) -> str:
     mood = search_cfg["moods"][0]
     context_word = CONTEXT_KEYWORDS.get(context_key, "")
 
-    parts = [f"genre:{genre}", mood]
+    parts = [genre, mood]
     if context_word and context_word != mood:
         parts.append(context_word)
 
@@ -135,8 +135,7 @@ def get_recommendations(
     sp = get_spotify_client()
     query = _build_query(emotion_key, context_key)
 
-    fetch_limit = min(limit * 3, 50)
-    raw = sp.search(q=query, type="track", limit=fetch_limit)
+    raw = sp.search(q=query, type="track", limit=20, market="US")
     items = raw.get("tracks", {}).get("items", [])
     items = [t for t in items if t.get("id")]
     items.sort(key=_popularity_score, reverse=True)
