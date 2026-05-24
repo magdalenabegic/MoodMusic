@@ -2,8 +2,9 @@
 Last.fm API client for mood-based track recommendations.
 
 We use the Last.fm Tag API to fetch tracks associated with mood and genre tags.
-Last.fm tags are crowd-sourced, users label tracks with terms like "calm", "happy", "energetic" which maps naturally onto the 
-affective computing concept of user-perceived emotion in music.
+Last.fm tags are crowd-sourced — users label tracks with terms like "calm",
+"happy", "energetic" — which maps naturally onto the affective computing
+concept of user-perceived emotion in music.
 
 Authentication:
     Last.fm uses a simple API key (no OAuth required for read-only access).
@@ -49,11 +50,18 @@ CONTEXT_TAGS: dict[str, str] = {
 
 
 def _get_api_key() -> str:
-    key = os.getenv("LASTFM_API_KEY")
+    # Try Streamlit Cloud secrets first, fall back to .env for local development.
+    try:
+        import streamlit as st
+        key = st.secrets.get("LASTFM_API_KEY")
+    except Exception:
+        key = None
+    if not key:
+        key = os.getenv("LASTFM_API_KEY")
     if not key:
         raise ValueError(
             "Last.fm API key not found. "
-            "Add LASTFM_API_KEY to your .env file."
+            "Add LASTFM_API_KEY to your .env file or Streamlit secrets."
         )
     return key
 
@@ -61,6 +69,7 @@ def _get_api_key() -> str:
 def _fetch_tag_tracks(tag: str, limit: int = 20) -> list[dict]:
     """
     Fetch top tracks for a Last.fm tag.
+
     Returns a list of raw Last.fm track dicts, or an empty list on failure.
     """
     params = {
